@@ -1,0 +1,5 @@
+
+web3.padRight(web3.fromAscii('hello'), 66)
+web3.toAscii('')
+
+ethers.utils.solidityKeccak256(['string', 'string', 'string', 'uint16', 'uint16'],['qwetyu','qqyg','iuaq','1231','123'])

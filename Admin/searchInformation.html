@@ -1,0 +1,142 @@
+<!doctype html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="../assets/bootstrap.min.css" rel="stylesheet">
+        <link href="../assets/floatingLabel.css" rel="stylesheet">
+        <script src="../node_modules/left-pad/index.js"></script>
+        <script src="../assets/web3.min.js"></script>
+        <title>LandRegistry</title>
+    </head> 
+    <body>
+        <div class="conteiner">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="navbar-brand" href="http://localhost/landRegistry/Admin/home.html">LandRegistry</a>
+        
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li class="nav-item active">
+                        <a class="nav-link" href="http://localhost/landRegistry/Admin/home.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="http://localhost/landRegistry/Admin/landInformationEntry.html">Information Entry</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://localhost/landRegistry/Admin/searchInformation.html-">Search Information</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="col-md-12">
+                <h1 class="text-center">Search Land Information</h1>
+                <br>
+                <div class="col-md-12">
+                    <div class ="row">
+                        <input class="form-control col-md-2" id="_serialNo" type="number" placeholder="Serial No" aria-label="Search">
+                        <input class="form-control col-md-2" id="_bookNo" type="number" placeholder="Book No" aria-label="Search">
+                        <input class="form-control col-md-2" id="_titleNo" type="number" placeholder="Title No" aria-label="Search">
+                        <select class="custom-select col-md-2" id="_titleType">
+                            <option selected value="0">Select Land Type</option>
+                            <option value="1">Housing</option>
+                            <option value="2">Farming</option>
+                            <option value="3">Potit</option>
+                        </select>
+                        <input class="form-control col-md-2" id="_titleArea" type="number" placeholder="Title Area" aria-label="Search">
+                        <button class="btn btn-outline-success col-md-2" type="button" id="btnSearch">Search</button>        
+                    </div>
+                </div>
+                <br>
+                <div class="table-responsive">
+                    <table class="table table-striped" id ="searchTable">
+                        <caption>Search Results</caption><br>
+                        <thead>
+                            <tr>
+                                <th>Serial No</th>
+                                <th>Book No</th>
+                                <th>title No</th>
+                                <th>Title type</th>
+                                <th>Title Area</th>
+                                <th>Percent Own</th>
+                                <th>Office Address</th>
+                                <th>Mouja No</th>
+                                <th>Line No</th>
+                                <th>Seller</th>
+                                <th>Buyer</th>
+                                <th>Buy Form</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- <tr>
+                                <td>Owner name</td>
+                                <td>Land Number</td>
+                                <td>Mouza name</td>
+                                <td>Mouza number</td>
+                                <td>address</td>
+                                <td>land location</td>
+                                <td>Quantity</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <script src="../assets/jquery.min.js"></script>
+        <script src="../assets/popper.min.js"></script>
+        <script src="../assets/bootstrap.min.js"></script>
+
+        <script>
+            if (typeof web3 !== 'undefined') {
+                web3 = new Web3(web3.currentProvider);
+            } else {
+                // set the provider you want from Web3.providers
+                // web3 = new Web3(new Web3.providers.HttpProvider("https://rinkeby.infura.io/v3/8cc5ad5dd4754880896babcc1e5bcc4f"));
+                web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+            }
+            // console.log(web3.fromAscii("1254amihd"))
+            var accountAddress =  web3.eth.defaultAccount = web3.eth.accounts[0];
+            var LandContract = web3.eth.contract([{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getTitleHashById","outputs":[{"name":"titleHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"titleHash","type":"bytes32"}],"name":"getTitleMappingByTitilehash","outputs":[{"name":"serialNo","type":"uint16"},{"name":"bookNo","type":"uint16"},{"name":"titleNo","type":"uint16"},{"name":"titleType","type":"uint8"},{"name":"titleArea","type":"uint16"},{"name":"percentOwn","type":"uint8"},{"name":"officeAddress","type":"string"},{"name":"moujaNo","type":"bytes32"},{"name":"lineNo","type":"bytes32"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"buyFormTitleHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTitleArrayLength","outputs":[{"name":"count","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_serialNo","type":"uint16"},{"name":"_bookNo","type":"uint16"},{"name":"_titleNo","type":"uint16"},{"name":"_titleType","type":"uint8"},{"name":"_titleArea","type":"uint16"},{"name":"_officeAddress","type":"string"},{"name":"_moujaNo","type":"bytes32"},{"name":"_lineNo","type":"bytes32"},{"name":"_buyer","type":"address"}],"name":"creatNewTitle","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_serialNo","type":"uint16"},{"name":"_bookNo","type":"uint16"},{"name":"_titleNo","type":"uint16"},{"name":"_titleType","type":"uint8"},{"name":"_titleArea","type":"uint16"},{"name":"_percentOwn","type":"uint8"},{"name":"_officeAddress","type":"string"},{"name":"_moujaNo","type":"bytes32"},{"name":"_lineNo","type":"bytes32"},{"name":"_seller","type":"address"},{"name":"_buyer","type":"address"},{"name":"_buyFormTitleHash","type":"bytes32"}],"name":"creatNewTitleFormExistingOne","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"titleMapping","outputs":[{"name":"serialNo","type":"uint16"},{"name":"bookNo","type":"uint16"},{"name":"titleNo","type":"uint16"},{"name":"titleType","type":"uint8"},{"name":"titleArea","type":"uint16"},{"name":"percentOwn","type":"uint8"},{"name":"isExist","type":"bool"},{"name":"officeAddress","type":"string"},{"name":"moujaNo","type":"bytes32"},{"name":"lineNo","type":"bytes32"},{"name":"seller","type":"address"},{"name":"buyer","type":"address"},{"name":"buyFormTitleHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"contarctOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"titleArray","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"titleHash","type":"bytes32"}],"name":"creationOftitle","type":"event"}]);
+            var contract = LandContract.at('0x9f9649647f6f4f699adc958b884e3b6492c046bd');
+
+           
+            $("#btnSearch").click(function(){
+                var  serialNo = leftPad(($("#_serialNo").val()).toString(16), 4, 0);
+                var  bookNo = leftPad(($("#_bookNo").val()).toString(16), 4, 0);
+                var  titleNo = leftPad(($("#_titleNo").val()).toString(16), 4, 0);
+                var  titleType = leftPad(($("#_titleType").val()).toString(16), 2, 0);
+                var  titleArea = leftPad(($("#_titleArea").val()).toString(16), 4, 0);
+                var con = serialNo + bookNo + titleNo + titleType + titleArea;
+                console.log(con);
+                var  abi = leftPad((con).toString(64), 4, 0);
+                const titlehash = web3.sha3(abi, { encoding: 'hex' })
+                console.log(titlehash);
+
+                contract.getTitleMappingByTitilehash(titlehash,(err, res)=>{
+                        if(err){
+                            console.log('error');
+                        }else{
+                            var SerialNo = res[0].toString(10);
+                            var BookNo = res[1].toString(10);
+                            var TitleNo = res[2].toString(10);
+                            var TitleType = res[3].toString(10); 
+                            var TitleArea  = res[4].toString(10);
+                            var PercentOwn = res[5].toString(10);
+                            var OfficeAddress = res[6].toString();
+                            var MoujaNo = web3.toAscii(res[7]);
+                            var LineNo = web3.toAscii(res[8]);
+                            var Seller = res[9];
+                            var Buyer = res[10];
+                            var BuyForm = res[11];
+                            console.log(res);
+                            $('#searchTable').append('<tr><td>'+SerialNo+'</td><td>'+BookNo+'</td><td>'+TitleNo+'</td><td>'+TitleType+'</td><td>'+TitleArea+'</td><td>'+PercentOwn+'</td><td>'+OfficeAddress+'</td><td>'+MoujaNo+'</td><td>'+LineNo+'</td><td>'+Seller+'</td><td>'+Buyer+'</td><td>'+BuyForm+'</td></tr>');
+                        }
+                    });
+            });
+            
+        </script>
+    </body>   
+</html>

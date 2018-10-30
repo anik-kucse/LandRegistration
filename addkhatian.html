@@ -1,0 +1,206 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Add Khatian</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="Assets/css/custom.css">
+    <link href="Assets/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="container-fluid navbar navbar-expand" id="navbar">
+        <a class="navbar-brand" href="#">LandRegistryManagement</a>
+    </nav>
+    <!-- sidebar -->
+    <div class="container-fluid" id="content" >
+        <div class="row">
+            <div class="col-md-2" id="sidebar">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="adduser.html" class="nav-link">Add User</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="addplot.html" class="nav-link">Add Plot</a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="addkhatian.html" class="nav-link">Add Khatian</a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="claculatehash.html" class="nav-link">Calculate Hash</a>
+                    </li>
+                    <li class="nav-item">
+                            <a href="search.html" class="nav-link">Search</a>
+                    </li>
+                </ul>        
+            </div>
+    <!-- body -->
+            <div class="col-md-10">
+                <h1 style="text-align:center">Add Khatian</h1>
+                <div class="row justify-content-around">
+                    <div class="col-12 form-group row">
+                        <label for="ddlKhatianType" class="col-2 col-form-label">Khtain Type</label>
+                        <div class="col-10" >
+                            <select class="form-control" id="ddlKhatianType">
+                                <option value="1">Create A New Khatian</option>
+                                <option value="2">Create From an Existing Khatian</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row">
+                        <label class="col-2 col-form-label">Khatian No</label>
+                        <div class="col-10">
+                            <input id="khatianiId" class="form-control" type="number">
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row">
+                        <label class="col-2 col-form-label">Plot Hash</label>
+                        <div class="col-10">
+                            <input id="plotHash" class="form-control" type="text" >
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row">
+                        <label class="col-2 col-form-label">Percent Own</label>
+                        <div class="col-10">
+                            <input id="percentOwn" class="form-control" type="number" >
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row" id="buyFromDiv">
+                        <label class="col-2 col-form-label">Previious Khatian Hash</label>
+                        <div class="col-10">
+                            <input id="buyFrom" class="form-control" type="text" >
+                        </div>
+                    </div>
+                    <div class='items col-12'>
+                        <div class="col-12 form-group row">
+                            <label class="col-2 col-form-label">Owern Nid</label>
+                            <div class="col-4">
+                                <input id="user1" class="form-control" type="number" >
+                            </div>
+                            <label class="col-2 col-form-label">Owner Percentage</label>
+                            <div class="col-3">
+                                <input id="percentage1" class="form-control" type="number" >
+                            </div>
+                            <div class="col-1">
+                                <a href="javascript:void(0);" class="add_field_button" title="Add field"><img src="Assets/images/plus.png" alt='add' width="35" height="47"/></a>                    
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row" id="success">    
+                        <div class="alert alert-success alert-dismissible fade show col-12">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Success!</strong>
+                        </div>
+                    </div>
+                    <div class="col-12 form-group row" id="fail">        
+                        <div class="alert alert-danger alert-dismissible fade show col-12">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Failed!</strong> see console for Detail log.
+                        </div>
+                    </div>
+                    <div class="col-12 justify-content-around form-group row">
+                        <button id="btnAddKhatian" class="btn btn-secondary" style="width:120px;">Add Khatian</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- footer -->
+    <footer class="footer">
+        <div class="container-fluid">
+            <p style="text-align:center">&copy; CSE Decipline,Khulna University<p>
+        </div>
+    </footer>
+    <script src="Assets/Js/web3.min.js"></script>
+    <script src="Assets/Js/jquery.min.js"></script>
+    <script src="Assets/Js/popper.min.js"></script>
+    <script src="Assets/Js/bootstrap.min.js"></script>
+    <script>
+        var wrapper = $(".items"); //Fields wrapper
+        var add_button = $(".add_field_button"); //Add button ID
+        var x = 1; //initlal text box count
+        $(add_button).click(function(e){ //on add input button click
+            e.preventDefault();
+            x++; //text box increment
+            $(wrapper).prepend('<div class="col-12 form-group row"><label class="col-2 col-form-label">Owern Nid</label><div class="col-4"><input id="user'+x+'" class="form-control" type="number" ></div><label class="col-2 col-form-label">Owner Percentage</label><div class="col-3"><input id="percentage'+x+'" class="form-control" type="number" ></div><div class="col-1"><a href="javascript:void(0);" class="remove_field" title="remove field"><img src="Assets/images/minus.png" alt="Remove" width="35" height="34"/></a></div></div>');
+            console.log(x);
+        });
+ 
+        $(wrapper).on("click",".remove_field", function(e){ //user click on remove field
+            e.preventDefault(); 
+            var currentDiv = $(this).parent();
+            currentDiv.parent().remove();
+            x--;
+            console.log(x);
+        })
+
+        $('#success').hide();
+        $('#fail').hide();
+
+        var selection_type  = $("#ddlKhatianType").val();
+        if (selection_type == 1){
+            $("#buyFromDiv").hide();
+        }
+
+        $('#ddlKhatianType').change(function(){
+            var selection_type1  = $("#ddlKhatianType").val();
+            // console.log(selection_type1)
+            if (selection_type1 == 1){
+                $("#buyFromDiv").hide();
+            }else if(selection_type1 == 2){
+                $("#buyFromDiv").show();
+            }
+        });
+            
+        if (typeof web3 !== 'undefined') {
+            web3 = new Web3(web3.currentProvider);
+        } else {
+            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+        var accountAddress =  web3.eth.defaultAccount = web3.eth.accounts[0];
+        var LandContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_khatianiId","type":"uint64"},{"name":"_plotHash","type":"bytes32"},{"name":"_percentOwn","type":"uint16"},{"name":"_buyFrom","type":"bytes32"},{"name":"_user","type":"uint256[]"},{"name":"_percentage","type":"uint16[]"}],"name":"addKhatianFromOld","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getPlotArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_division","type":"string"},{"name":"_district","type":"string"},{"name":"_thana","type":"string"},{"name":"_JLNo","type":"uint16"},{"name":"_plotNo","type":"uint16"},{"name":"_plotType","type":"uint8"},{"name":"_plotArea","type":"uint32"}],"name":"addPlot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_nid","type":"uint256"}],"name":"getUserByNid","outputs":[{"name":"fullName","type":"bytes32"},{"name":"fatheName","type":"bytes32"},{"name":"district","type":"bytes32"},{"name":"thana","type":"bytes32"},{"name":"postCode","type":"uint24"},{"name":"village","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"khatianHash","type":"bytes32"}],"name":"getKhatianByHash","outputs":[{"name":"khatianiId","type":"uint64"},{"name":"plotHash","type":"bytes32"},{"name":"percentOwn","type":"uint16"},{"name":"buyFrom","type":"bytes32"},{"name":"sellTo","type":"bytes32[]"},{"name":"sellPercentage","type":"uint16[]"},{"name":"ownerArray","type":"uint256[]"},{"name":"perOwnerPercentage","type":"uint16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_khatianiId","type":"uint64"},{"name":"_plotHash","type":"bytes32"},{"name":"_percentOwn","type":"uint16"},{"name":"_user","type":"uint256[]"},{"name":"_percentage","type":"uint16[]"}],"name":"addKhatianNew","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_uid","type":"uint256"}],"name":"getUserOwnedByUid","outputs":[{"name":"number","type":"uint256"},{"name":"khatianList","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_uid","type":"uint256"},{"name":"_khatianHash","type":"bytes32"}],"name":"addUserOwned","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getUserIdById","outputs":[{"name":"UserId","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getKhatianHasById","outputs":[{"name":"khatianHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"plotHash","type":"bytes32"}],"name":"getPlotByHash","outputs":[{"name":"division","type":"bytes32"},{"name":"district","type":"bytes32"},{"name":"thana","type":"bytes32"},{"name":"JLNo","type":"uint16"},{"name":"plotNo","type":"uint16"},{"name":"plotType","type":"uint8"},{"name":"plotArea","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getKhatianArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fullName","type":"string"},{"name":"_fatheName","type":"string"},{"name":"_district","type":"string"},{"name":"_thana","type":"string"},{"name":"_postCode","type":"uint24"},{"name":"_village","type":"string"},{"name":"_nid","type":"uint256"}],"name":"creatNewUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getPlotHashById","outputs":[{"name":"plotHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"plotHash","type":"bytes32"}],"name":"creationOfplot","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"nid","type":"uint256"}],"name":"creationOfUser","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"khatianHash","type":"bytes32"}],"name":"creationOfKhatian","type":"event"}]);
+        var contract = LandContract.at('0x89df08e938f1ef2fa1ff93c1203da6ba90393890');
+
+        $("#btnAddKhatian").click(function(){
+            var khatianiId = parseInt($('#khatianiId').val());
+            var plotHash = $('#plotHash').val();
+            var percentOwn = parseInt($('#percentOwn').val());
+            var buyFrom = $('#buyFrom').val();
+            var users = [];
+            var perOwnerPercentage = [];
+            for (i = 1; i <= x; i++) { 
+                users.push(parseInt($('#user'+i).val()))
+                perOwnerPercentage.push(parseInt($('#percentage'+i).val()))
+            }
+            console.log(khatianiId,plotHash,percentOwn,buyFrom, users,perOwnerPercentage);
+
+            if($("#ddlKhatianType").val() == 1){
+                contract.addKhatianNew(khatianiId, plotHash, percentOwn, users, perOwnerPercentage,{gas:1000000},(err, res)=>{
+                    if(err){
+                        console.log(err);
+                        $('#fail').show();
+                    }else{
+                        console.log("success");
+                        $('#success').show();
+                    }
+                });
+            }else{
+                contract.addKhatianFromOld(khatianiId, plotHash, percentOwn, buyFrom, users, perOwnerPercentage,{gas:1000000},(err, res)=>{
+                    if(err){
+                        console.log(err);
+                        $('#fail').show();
+                    }else{
+                        console.log("success");
+                        $('#success').show();
+                    }
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

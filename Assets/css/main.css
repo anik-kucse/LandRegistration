@@ -1,0 +1,14 @@
+.contentMiddle{
+    height: 70%;
+    width: 70%;
+    margin: 5%;
+    margin-left: 15%;
+    background-color: gainsboro;
+}
+.navbarEdited{
+    height: 10%;
+    width: 100%;
+}
+button{
+    background-color: azure;
+}
