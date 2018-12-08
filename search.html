@@ -10,11 +10,13 @@
 </head>
 <body>
     <!-- Navbar -->
-    <nav class="container-fluid navbar navbar-expand" id="navbar">
-        <a class="navbar-brand" href="#">LandRegistryManagement</a>
-    </nav>
+    <div class = "nav">
+        <nav class="container-fluid navbar navbar-expand fixed-top" id="navbar">
+            <a class="navbar-brand" href="#">LandRegistryManagement</a>
+        </nav>
+    </div>
     <!-- sidebar -->
-    <div class="container-fluid" id="content" >
+    <div class="container-fluid" id="content" style="padding-top:49px" >
         <div class="row">
             <div class="col-md-2" id="sidebar">
                 <ul class="nav flex-column">
@@ -40,55 +42,58 @@
             </div>
     <!-- body -->
             <div class="col-md-10">
-                <h1 style="text-align:center">Add New Plot</h1>
+                <h1 style="text-align:center">Search</h1>
                 <div class="row justify-content-around">
                     <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">Division</label>
-                        <div class="col-10">
-                            <input id="division" class="form-control" type=>
+                        <!-- <label for="gender" class="col-1 col-form-label">Search For</label> -->
+                        <div class="col-3" >
+                            <select class="form-control" id="selector">
+                                    <option value="1">Khatian Detail</option>
+                                <option value="0">Search For</option>
+                                
+                                <option value="2">Plot Detail</option>
+                                <option value="3">User Detail</option>
+                                <option value="4">User Owned lsit</option>
+                            </select>
+                        </div>
+                        <div class="col-7">
+                            <input id="txtSearch" class="form-control" type="text" >
+                        </div>    
+                        <div class="col-2 justify-content-around form-group row">
+                            <button id="btnSearch" class="btn btn-secondary">Search</button>
                         </div>
                     </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">District</label>
-                        <div class="col-10">
-                            <input id="district" class="form-control" type="text" >
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">Thana</label>
-                        <div class="col-10">
-                            <input id="thana" class="form-control" type="text" >
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">JL No</label>
-                        <div class="col-10">
-                            <input id="JLNo" class="form-control" type="number" >
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">Plot No</label>
-                        <div class="col-10">
-                            <input id="plotNo" class="form-control" type="number" >
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">Plot Type</label>
-                        <div class="col-10">
-                            <input id="plotType" class="form-control" type="number" >
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row">
-                        <label class="col-2 col-form-label">Area of Plot</label>
-                        <div class="col-10">
-                            <input id="plotArea" class="form-control" type="number">
-                        </div>
-                    </div>
-                    <div class="col-12 form-group row" id="success">    
-                        <div class="alert alert-success alert-dismissible fade show col-12">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Success!</strong>
-                        </div>
+                    <div class="col-12 justify-content-around" style="overflow-x:auto;">
+                        <table class="table table-striped" id=tblKhatian>
+                            <caption>Khatian Detail</caption>
+                            <thead>
+                                <tr>
+                                    <th>Khatin No</th>
+                                    <th>Plot Hash</th>
+                                    <th>Persent Own</th>
+                                    <th>Owner NID(percentage)</th>
+                                    <th>Previous Khatian Hash</th>
+                                    <th>Sell To Khatian Hash(percentage)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>0x3e1510ddb6c09b7f0353a86282ecf4a7b0a6a3bba70e58da4a07f62ec2208880</td>
+                                    <td>100</td>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr><td><a class="aOwner" href="#">123(50)</a><td></tr>
+                                                <tr><td><a class="aOwner" href="#">456(50)</a><td></tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>0x8880a32ed72fe535093c8d4d0bb72ba72e3028ec54a3e402f6d3539b1019d052</td>
+                                    <td>0x3e1510ddb6c09b7f0353a86282ecf4a7b0a6a3bba70e58da4a07f62ec2208880(100)</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <div class="col-12 form-group row" id="fail">        
                         <div class="alert alert-danger alert-dismissible fade show col-12">
@@ -96,15 +101,12 @@
                             <strong>Failed!</strong> see console for Detail log.
                         </div>
                     </div>
-                    <div class="col-12 justify-content-around form-group row">
-                        <button id="btnAddUser" class="btn btn-secondary" style="width:100px;">Add User</button>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- footer -->
-    <footer class="footer">
+    <footer class="fixed-bottom footer">
         <div class="container-fluid">
             <p style="text-align:center">&copy; CSE Decipline,Khulna University<p>
         </div>
@@ -113,40 +115,117 @@
     <script src="Assets/Js/jquery.min.js"></script>
     <script src="Assets/Js/popper.min.js"></script>
     <script src="Assets/Js/bootstrap.min.js"></script>
+    <script src="Assets/Js/web3Init.js"></script>
     <script>
-        $('#success').hide();
+        $('[data-toggle="popover"]').popover();
         $('#fail').hide();
-            
-        if (typeof web3 !== 'undefined') {
-            web3 = new Web3(web3.currentProvider);
-        } else {
-            web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-        }
-        var accountAddress =  web3.eth.defaultAccount = web3.eth.accounts[0];
-        var LandContract = web3.eth.contract([{"constant":false,"inputs":[{"name":"_khatianiId","type":"uint64"},{"name":"_plotHash","type":"bytes32"},{"name":"_percentOwn","type":"uint16"},{"name":"_buyFrom","type":"bytes32"},{"name":"_user","type":"uint256[]"},{"name":"_percentage","type":"uint16[]"}],"name":"addKhatianFromOld","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getPlotArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_division","type":"string"},{"name":"_district","type":"string"},{"name":"_thana","type":"string"},{"name":"_JLNo","type":"uint16"},{"name":"_plotNo","type":"uint16"},{"name":"_plotType","type":"uint8"},{"name":"_plotArea","type":"uint32"}],"name":"addPlot","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_nid","type":"uint256"}],"name":"getUserByNid","outputs":[{"name":"fullName","type":"bytes32"},{"name":"fatheName","type":"bytes32"},{"name":"district","type":"bytes32"},{"name":"thana","type":"bytes32"},{"name":"postCode","type":"uint24"},{"name":"village","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"khatianHash","type":"bytes32"}],"name":"getKhatianByHash","outputs":[{"name":"khatianiId","type":"uint64"},{"name":"plotHash","type":"bytes32"},{"name":"percentOwn","type":"uint16"},{"name":"buyFrom","type":"bytes32"},{"name":"sellTo","type":"bytes32[]"},{"name":"sellPercentage","type":"uint16[]"},{"name":"ownerArray","type":"uint256[]"},{"name":"perOwnerPercentage","type":"uint16[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_khatianiId","type":"uint64"},{"name":"_plotHash","type":"bytes32"},{"name":"_percentOwn","type":"uint16"},{"name":"_user","type":"uint256[]"},{"name":"_percentage","type":"uint16[]"}],"name":"addKhatianNew","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_uid","type":"uint256"}],"name":"getUserOwnedByUid","outputs":[{"name":"number","type":"uint256"},{"name":"khatianList","type":"bytes32[]"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_uid","type":"uint256"},{"name":"_khatianHash","type":"bytes32"}],"name":"addUserOwned","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getUserIdById","outputs":[{"name":"UserId","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getKhatianHasById","outputs":[{"name":"khatianHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"plotHash","type":"bytes32"}],"name":"getPlotByHash","outputs":[{"name":"division","type":"bytes32"},{"name":"district","type":"bytes32"},{"name":"thana","type":"bytes32"},{"name":"JLNo","type":"uint16"},{"name":"plotNo","type":"uint16"},{"name":"plotType","type":"uint8"},{"name":"plotArea","type":"uint32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getKhatianArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_fullName","type":"string"},{"name":"_fatheName","type":"string"},{"name":"_district","type":"string"},{"name":"_thana","type":"string"},{"name":"_postCode","type":"uint24"},{"name":"_village","type":"string"},{"name":"_nid","type":"uint256"}],"name":"creatNewUser","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"id","type":"uint256"}],"name":"getPlotHashById","outputs":[{"name":"plotHash","type":"bytes32"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getUserArrayLen","outputs":[{"name":"len","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"plotHash","type":"bytes32"}],"name":"creationOfplot","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"nid","type":"uint256"}],"name":"creationOfUser","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"khatianHash","type":"bytes32"}],"name":"creationOfKhatian","type":"event"}]);
-        var contract = LandContract.at('0x89df08e938f1ef2fa1ff93c1203da6ba90393890');
 
-        $("#btnAddUser").click(function(){
-            var division = $("#division").val();
-            var district = $("#district").val();
-            var thana = $("#thana").val();
-            var JLNo  = parseInt($("#JLNo").val());
-            var plotNo = parseInt($("#plotNo").val());
-            var plotType = parseInt($("#plotType").val());
-            var plotArea = parseInt($("#plotArea").val());
-            // console.log( division,district,thana,JLNo,plottypeof postCode,typeof nid);
+        $("#btnSearch").click(function(){
+            var selector = $('#selector').val();
+            if(selector == 1){
+                var hash = $('#txtSearch').val();
+                creatRow(hash);
+            }
+        });
 
-            contract.addPlot(division, district, thana, JLNo, plotNo, plotType, plotArea,{gas:1000000},(err, res)=>{
+        function creatRow(hash){
+            contract.getKhatianByHash(hash,(err, res)=>{
                 if(err){
                     console.log(err);
                     $('#fail').show();
                 }else{
-                    console.log("success");
-                    $('#success').show();
+                    console.log('Success');
+                    if(res[3]== '0x0000000000000000000000000000000000000000000000000000000000000000'){
+                        var buyFrom = 'None';
+                    }else{
+                        buyFrom = '<a class="aBuyFrom" href="#">'+res[3]+'</a>';
+                    }
+                    sellToLen = res[4].length;
+                    OwnerLen = res[6].length;
+                    var sellto = '';
+                    if(sellToLen == 0){
+                        sellto = 'None';
+                    }else{
+                        sellto = '<table><tbody>';
+                        for(i = 0; i<sellToLen; i++){
+                           sellto = sellto +'<tr><td><a class="aSellTo" href="#">'+(res[4][i]+'('+res[5][i]+')</a><td></tr>');
+                        }
+                        sellto = sellto + '</tbody></table>';
+                    }
+                    var owner = '<table><tbody>' ;
+                    for(i = 0; i<OwnerLen; i++){
+                        owner = owner +'<tr><td><a class="aOwner" href="#">'+(res[6][i]+'('+res[7][i]+')</a><td></tr>');
+                    }
+                    owner = owner + '</tbody></table>';
+                    // console.log(owner);
+                    $('#fail').hide();
+                    $('#tblKhatian').append('<tr><td>'+res[0].toNumber()+'</td><td><a class="aPlot" href="#">'+res[1]+'</a></td><td>'+res[2].toNumber()+'</td><td>'+owner+'</td><td>'+buyFrom+'</td><td>'+sellto+'</td></tr>')
+                
                 }
             });
-        });
+        }
 
+        $(tblKhatian).on("click",".aOwner", function(e){
+            e.preventDefault();
+            var text = this.text;
+            var text = text.replace(/\(/g,',');
+            var text = text.replace(/\)/g,',');
+            var text = text.split(',');
+            contract.getUserByNid(text[0],(err,res)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    var fullName = web3.toAscii(res[0]);
+                    var fatheName = web3.toAscii(res[1]);
+                    var district = web3.toAscii(res[2]);
+                    var thana = web3.toAscii(res[3]);
+                    var postCode = res[4].toNumber();
+                    var village = web3.toAscii(res[5]);
+                    console.log(fullName, fatheName, district, thana, postCode, village);
+                    
+                    alert("User Detail\nName: "+fullName+"\nFather's Name: "+ fatheName+"\ndistrict: "+district+"\nThana: "+thana+"\nPost Code: "+postCode+"\nVillage: "+village);
+                }
+            });
+        
+        })
+
+        $(tblKhatian).on("click",".aPlot", function(e){
+            e.preventDefault();
+            var text = this.text;
+            contract.getPlotByHash(text,(err,res)=>{
+                if(err){
+                    console.log(err);
+                }else{
+                    var division  = web3.toAscii(res[0]);
+                    var district  = web3.toAscii(res[1]);
+                    var thana  = web3.toAscii(res[2]);
+                    var JLNo = res[3].toNumber();
+                    var plotNo = res[4].toNumber();
+                    var plotType  = res[5].toNumber();
+                    var plotArea = res[6].toNumber();
+                    console.log(division,district, thana, JLNo, plotNo, plotType, plotArea);
+                    
+                    alert("Plot Detail\ndivision: "+division+"\nDistrict: "+district+"\nThana: "+thana+"\nJLNo: "+JLNo+"\nPlot No: "+plotNo+"\nPlot Type: "+plotType+"\nPlot Area: "+plotArea);
+                }
+            });
+        })
+
+        $(tblKhatian).on("click",".aSellTo", function(e){
+            e.preventDefault();
+            var text = this.text;
+            var text = text.replace(/\(/g,',');
+            var text = text.replace(/\)/g,',');
+            var text = text.split(',');
+            console.log(text[0]);
+            creatRow(text[0]);
+        })
+
+        $(tblKhatian).on("click",".aBuyFrom", function(e){
+            e.preventDefault();
+            var text = this.text;
+            console.log(text);
+            creatRow(text);
+        })
     </script>
 </body>
 </html>
