@@ -64,6 +64,7 @@ contract landRegistration {
     
     function addKhatianNew(uint64 _khatianiId, bytes32 _plotHash, uint16 _percentOwn, uint[] _user, uint16[] _percentage) public{
         require(msg.sender == contarctOwner, "Sender is not authorized");
+        require(plotMapping[_plotHash].isExist == true, "Plot doesn't exist");
         bytes32 khatianHash = keccak256(abi.encodePacked(_khatianiId, _plotHash));
         require(khatianMapping[khatianHash].isExist != true, "Khatian already exists");
         for(uint j = 0; j< _user.length; j++){
@@ -87,6 +88,7 @@ contract landRegistration {
     
     function addKhatianFromOld(uint64 _khatianiId, bytes32 _plotHash, uint16 _percentOwn, bytes32 _buyFrom, uint[] _user, uint16[] _percentage) public{
         require(msg.sender == contarctOwner, "Sender is not authorized");
+        require(plotMapping[_plotHash].isExist == true, "Plot doesn't exist");
         
         bytes32 khatianHash = keccak256(abi.encodePacked(_khatianiId, _plotHash));
         
