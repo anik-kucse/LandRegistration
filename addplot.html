@@ -119,6 +119,18 @@
         $('#success').hide();
         $('#fail').hide();
 
+        function forceInputUppercase(e)
+        {
+            var start = e.target.selectionStart;
+            var end = e.target.selectionEnd;
+            e.target.value = e.target.value.toUpperCase();
+            e.target.setSelectionRange(start, end);
+        }
+
+        document.getElementById("division").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("district").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("thana").addEventListener("keyup", forceInputUppercase, false);
+
         $("#btnAddUser").click(function(){
             var division = $("#division").val();
             var district = $("#district").val();

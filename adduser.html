@@ -45,7 +45,7 @@
                     <div class="col-12 form-group row">
                         <label class="col-2 col-form-label">Full Name</label>
                         <div class="col-10">
-                            <input id="fullName" class="form-control" type=>
+                            <input id="fullName" class="form-control" type="text">
                         </div>
                     </div>
                     <div class="col-12 form-group row">
@@ -118,6 +118,20 @@
     <script>
         $('#success').hide();
         $('#fail').hide();
+
+        function forceInputUppercase(e)
+        {
+            var start = e.target.selectionStart;
+            var end = e.target.selectionEnd;
+            e.target.value = e.target.value.toUpperCase();
+            e.target.setSelectionRange(start, end);
+        }
+
+        document.getElementById("fullName").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("fatherName").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("district").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("thana").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("village").addEventListener("keyup", forceInputUppercase, false);
         
         $("#btnAddUser").click(function(){
             var fullName = $("#fullName").val();

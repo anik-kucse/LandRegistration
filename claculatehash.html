@@ -122,6 +122,18 @@
     <script>
         $('#info_plot').hide();
         $('#info_khatian').hide();
+
+        function forceInputUppercase(e)
+        {
+            var start = e.target.selectionStart;
+            var end = e.target.selectionEnd;
+            e.target.value = e.target.value.toUpperCase();
+            e.target.setSelectionRange(start, end);
+        }
+
+        document.getElementById("division").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("district").addEventListener("keyup", forceInputUppercase, false);
+        document.getElementById("thana").addEventListener("keyup", forceInputUppercase, false);
         
         $("#btnPlotHash").click(function(){
             var division = $("#division").val();

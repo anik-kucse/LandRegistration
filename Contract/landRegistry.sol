@@ -66,6 +66,9 @@ contract landRegistration {
         require(msg.sender == contarctOwner, "Sender is not authorized");
         bytes32 khatianHash = keccak256(abi.encodePacked(_khatianiId, _plotHash));
         require(khatianMapping[khatianHash].isExist != true, "Khatian already exists");
+        for(uint j = 0; j< _user.length; j++){
+             require(userMapping[_user[j]].isExist == true, "User's NID doesn't exist");
+        }
         
         khatianMapping[khatianHash].khatianiId = _khatianiId;
         khatianMapping[khatianHash].plotHash = _plotHash;
@@ -90,6 +93,9 @@ contract landRegistration {
         require(khatianMapping[khatianHash].isExist != true, "Khatian already exists");
         require(khatianMapping[_buyFrom].isExist, "previous Khatian doesn't exist");
         require(khatianMapping[_buyFrom].percentOwn >= _percentOwn, "Not enough land to sell");
+        for(uint j = 0; j< _user.length; j++){
+             require(userMapping[_user[j]].isExist == true, "User's NID doesn't exist");
+        }
         
         khatianMapping[_buyFrom].sellTo.push(khatianHash);
         khatianMapping[_buyFrom].sellPercentage.push(_percentOwn);
@@ -140,6 +146,9 @@ contract landRegistration {
     
     function addPlot(string _division, string _district, string _thana, uint16 _JLNo, uint16 _plotNo, uint8 _plotType, uint32 _plotArea) public{
         require(msg.sender == contarctOwner, "You are not authorized");
+        _division = toUpper(_division);
+        _district = toUpper(_district);
+        _thana = toUpper(_thana);
         bytes32 plotHash = keccak256(abi.encodePacked(_division, _district, _thana, _JLNo, _plotNo));
         require(plotMapping[plotHash].isExist != true, "Plot already exsits");
         plotMapping[plotHash].division = stringToBytes32(_division);
@@ -176,6 +185,11 @@ contract landRegistration {
     
     function creatNewUser(string _fullName, string _fatheName, string _district, string _thana, uint24 _postCode, string _village, uint _nid) public{
         require(msg.sender == contarctOwner, "You are not authorized");
+        _fullName = toUpper(_fullName);
+        _fatheName = toUpper(_fatheName);
+        _district = toUpper(_district);
+        _thana = toUpper(_thana);
+        _village = toUpper(_village);
         require(userMapping[_nid].isExist == false, "User already exist");
         
         userMapping[_nid].fullName = stringToBytes32(_fullName);
@@ -223,4 +237,17 @@ contract landRegistration {
             result := mload(add(source, 32))
         }
     }
+    
+    function toUpper(string str) internal pure returns (string) {
+		bytes memory bStr = bytes(str);
+		bytes memory bUpper = new bytes(bStr.length);
+		for (uint i = 0; i < bStr.length; i++) {
+			if ((bStr[i] >= 97) && (bStr[i] <= 122)) {
+				bUpper[i] = bytes1(int(bStr[i]) - 32);
+			} else {
+				bUpper[i] = bStr[i];
+			}
+		}
+		return string(bUpper);
+	}
 }
