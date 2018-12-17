@@ -12,7 +12,7 @@
     <!-- Navbar -->
     <div class = "nav">
         <nav class="container-fluid navbar navbar-expand fixed-top" id="navbar">
-            <a class="navbar-brand" href="#">LandRegistryManagement</a>
+            <a class="navbar-brand" href="#">Land Ownership Management</a>
         </nav>
     </div>
     <!-- sidebar -->
@@ -20,9 +20,9 @@
         <div class="row">
             <div class="col-md-2" id="sidebar">
                 <ul class="nav flex-column">
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="index.html" class="nav-link">Home</a>
-                    </li>
+                    </li> -->
                     <li class="nav-item">
                         <a href="adduser.html" class="nav-link">Add User</a>
                     </li>
@@ -203,7 +203,7 @@
                     var plotArea = res[6].toNumber();
                     console.log(division,district, thana, JLNo, plotNo, plotType, plotArea);
                     
-                    alert("Plot Detail\ndivision: "+division+"\nDistrict: "+district+"\nThana: "+thana+"\nJLNo: "+JLNo+"\nPlot No: "+plotNo+"\nPlot Type: "+plotType+"\nPlot Area: "+plotArea);
+                    alert("Plot Detail\ndivision: "+division+"\nDistrict: "+district+"\nThana: "+thana+"\nJLNo: "+JLNo+"\nPlot No: "+plotNo+"\nPlot Type: "+plotType+"\nArea: "+plotArea+" square meters");
                 }
             });
         })
