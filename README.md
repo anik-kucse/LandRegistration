@@ -6,8 +6,8 @@
 * Version: 1.0
 
 ## How do I get set up?
-* install [ganache-cli] (https://github.com/trufflesuite/ganache-cli).
-* Install [metamask] (https://metamask.io/).
+* install [ganache-cli](https://github.com/trufflesuite/ganache-cli).
+* Install [metamask](https://metamask.io/).
 * Run ganache-cli.
 ```bash
 ganache-cli -l 1000000000
